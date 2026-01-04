@@ -2,5 +2,5 @@ streamlit==1.25.0
 pandas
 numpy
 reportlab>=4.4.7
-pillow>=9.6.0
+pillow==12.1.0
 altair
