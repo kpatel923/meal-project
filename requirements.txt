@@ -1,6 +1,6 @@
-streamlit==1.25.0
+streamlit>=1.28.0
+pillow>=12.1.0
 pandas
 numpy
-reportlab>=4.4.7
-pillow==12.1.0
+reportlab
 altair
