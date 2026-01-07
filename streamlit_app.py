@@ -10,6 +10,17 @@ st.set_page_config(page_title="Weekly Meal Planner", layout="wide")
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# ===============================
+# Landing Header
+# ===============================
+st.markdown("""
+<div class="app-header">
+    <h1>🍽 Weekly Meal Planner</h1>
+    <p>Plan smarter, shop faster, and keep your week stress-free.</p>
+</div>
+""", unsafe_allow_html=True)
+
+
 days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 # Initialize weekly plan
@@ -93,10 +104,43 @@ def render_weekly_plan_tab(weekly_plan):
 def render_grocery_list_tab(weekly_plan):
     ingredient_mapping = build_ingredient_to_meals(weekly_plan)
     grocery = sorted(ingredient_mapping.keys())
+
+    # 🧠 UI Header
+    st.subheader("🛒 Grocery List")
+    st.caption("Check items as you shop or bulk-select below")
+
+    # ---- Controls Row ----
+    control_col1, control_col2, control_col3 = st.columns([1, 1, 2])
+
+    with control_col1:
+        if st.button("✅ Select All", use_container_width=True):
+            for ingredient in grocery:
+                st.session_state[f"grocery_{ingredient}"] = True
+    with control_col2:
+        if st.button("⬜ Clear All", use_container_width=True):
+            for ingredient in grocery:
+                st.session_state[f"grocery_{ingredient}"] = False
+    with control_col3:
+        show_meals = st.toggle(
+            "Show meals",
+            value=True
+        )
+
+    st.divider()
+    # ---- Grocery Items ----
     cols = st.columns(3)
     for i, ingredient in enumerate(grocery):
-        display_text = f"{ingredient} ({'; '.join(ingredient_mapping[ingredient])})"
-        cols[i % 3].checkbox(display_text)
+        key = f"grocery_{ingredient}"
+        ingredient_label = ingredient.title()  # ✨ Capitalized
+        if show_meals:
+            meals = "; ".join(ingredient_mapping[ingredient])
+            label = f"{ingredient_label}  \n*{meals}*"
+        else:
+            label = ingredient_label
+        cols[i % 3].checkbox(
+            label,
+            key=key
+        )
 
 
 def render_saved_weeks_tab():
