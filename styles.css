@@ -6,12 +6,20 @@
 
 /* ===== Day Card ===== */
 .day-card {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 36px auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* horizontal centering */
+    justify-content: center;  /* vertical flow balance */
+
     background-color: #0a0f2c;
     border-radius: 32px;
-    padding: 40px;
     border: 3px solid #374151;
     box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-    margin-bottom: 80px;
+
     animation: fadeInUp 0.7s ease forwards;
 }
 
@@ -21,23 +29,33 @@
     font-weight: 900;
     text-align: center;
     color: #f8fafc;
-    margin-bottom: 40px;
-    padding-bottom: 18px;
-    border-bottom: 2px solid #1e293b;
     letter-spacing: 0.6px;
+
+    margin-bottom: 28px; /* space between title & meals */
 }
 
 /* ===== Meal Grid (2 rows, 2 columns) ===== */
 .meal-grid {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 28px auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 28px 28px;
 }
 
+.meal-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
 /* ===== Flip Cards ===== */
 .flip-card {
     width: 100%;
-    height: 180px;
+    max-width: 720px;
+    margin: 0 auto 28px auto;
+    width: 100%;
+    height: 160px;
     perspective: 1200px;
     border-radius: 24px;
 }
@@ -68,12 +86,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     text-align: center;
     font-size: 24px;
     font-weight: 800;
     color: #f8fafc;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.flip-card-front::before {
+    content: "";
+    display: block;
+    width: 12px; /* width of the tip */
+    height: 100%;
+    margin-right: 16px; /* space between tip and text */
+    border-radius: 4px 0 0 4px;
 }
 
 .flip-card-front small {
@@ -102,16 +129,20 @@
 .flip-card-back a:hover { text-decoration: underline; }
 
 /* ===== Accent Colors ===== */
-.breakfast .flip-card-front { background: linear-gradient(145deg, #a15c27, #fbbf59); }
+.breakfast .flip-card-front::before { background: #fbbf59; }
+.lunch .flip-card-front::before { background: #34d399; }
+.dinner .flip-card-front::before { background: #a78bfa; }
+.snack .flip-card-front::before { background: #f472b6; }
+/* .breakfast .flip-card-front { background: linear-gradient(145deg, #a15c27, #fbbf59); } */
 .breakfast .flip-card-back b { color: #fcd34d; }
 
-.lunch .flip-card-front { background: linear-gradient(145deg, #11614c, #34d399); }
+/* .lunch .flip-card-front { background: linear-gradient(145deg, #11614c, #34d399); } */
 .lunch .flip-card-back b { color: #6ee7b7; }
 
-.dinner .flip-card-front { background: linear-gradient(145deg, #5c3e9a, #a78bfa); }
+/* .dinner .flip-card-front { background: linear-gradient(145deg, #5c3e9a, #a78bfa); } */
 .dinner .flip-card-back b { color: #d8b4fe; }
 
-.snack .flip-card-front { background: linear-gradient(145deg, #b63d6d, #f472b6); }
+/* .snack .flip-card-front { background: linear-gradient(145deg, #b63d6d, #f472b6); } */
 .snack .flip-card-back b { color: #f9a8d4; }
 
 .flip-card:hover .flip-card-front {

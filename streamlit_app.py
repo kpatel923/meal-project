@@ -41,12 +41,15 @@ if st.sidebar.button("📄 Download PDF"):
 # ===============================
 def render_weekly_plan_tab(weekly_plan):
     st.markdown("<br><br>", unsafe_allow_html=True)
-    cols = st.columns([1, 1], gap="large")
     for i, day in enumerate(days):
-        with cols[i % 2]:
             st.markdown(f'<div class="day-card"><div class="day-title">{day}</div><div class="meal-grid">', unsafe_allow_html=True)
 
-            for category in ["breakfast", "lunch", "dinner", "snack"]:
+            for category, icon in [
+                    ("breakfast", "🍳"),
+                    ("lunch", "🥗"),
+                    ("dinner", "🍝"),
+                    ("snack", "🍎"),
+                ]:
                 meal = weekly_plan[i].get(category)
                 if meal:
                     ingredients = ", ".join(sorted(meal["ingredients"]))
@@ -57,6 +60,7 @@ def render_weekly_plan_tab(weekly_plan):
                                 <input type="checkbox" class="flip-toggle">
                                 <div class="flip-card-inner">
                                     <div class="flip-card-front">
+                                        <span class="meal-icon">{icon}</span>
                                         {category.capitalize()}<br/><small>{meal["item_name"]}</small>
                                     </div>
                                     <div class="flip-card-back">
