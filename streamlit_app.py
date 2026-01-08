@@ -75,7 +75,7 @@ def render_weekly_plan_tab(weekly_plan):
                                         {category.capitalize()}<br/><small>{meal["item_name"]}</small>
                                     </div>
                                     <div class="flip-card-back">
-                                        <b>Ingredients</b><br>{ingredients}<br><br>{notes}
+                                        <b>Ingredients</b><br>{ingredients.title()}<br><br>{notes}
                                     </div>
                                 </div>
                             </label>
